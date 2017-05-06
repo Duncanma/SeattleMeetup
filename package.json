@@ -1,0 +1,22 @@
+{
+  "name": "seattlemeetup",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DuncanmaMSFT/SeattleMeetup.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DuncanmaMSFT/SeattleMeetup/issues"
+  },
+  "homepage": "https://github.com/DuncanmaMSFT/SeattleMeetup#readme",
+  "dependencies": {
+    "mysql": "^2.13.0"
+  }
+}
