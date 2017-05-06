@@ -1,13 +1,12 @@
 extends layout
 
 block content
-//Main jumbotron for a primary marketing message or call to action
-div.jumbotron
-  h1= title
-  p Welcome to #{title}
-
-div.row
-  each val in result
-    div.col-md-4
-      iframe(src=val.PlayerURL)
+  //Main jumbotron for a primary marketing message or call to action
+  div.jumbotron
+    h1= title
+    p Welcome to #{title}
+  div.row
+    each val in result
+      div.col-md-4
+        iframe(src=val.PlayerURL)
 
