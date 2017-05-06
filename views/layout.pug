@@ -1,13 +1,14 @@
 doctype html
 html
   head
-    title= title
-    link(rel='stylesheet', href='/css/bootstrap.min.css')
-    link(rel='stylesheet', href='/css/bootstrap-theme.min.css')
-    link(rel='stylesheet', href='/css/style.css')
+    block head
+      title= title
+      link(rel='stylesheet', href='/css/bootstrap.min.css' )
+      link(rel='stylesheet', href='/css/bootstrap-theme.min.css')
+      link(rel='stylesheet', href='/css/style.css')
   body
     div.container-fluid.theme-showcase(role="main")
       block content
-    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
-    script(src='/js/bootstrap.min.js')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
+    script(src='/js/bootstrap.min.js')
 
