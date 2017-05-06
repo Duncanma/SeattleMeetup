@@ -49,7 +49,7 @@ function endConnection() {
 	
 
 module.exports = {
-	getConnection : getConnection,
+	openConnection : openConnection,
 	endConnection : endConnection,
 	getVideos: getVideos
 };
