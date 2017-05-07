@@ -16,6 +16,7 @@ var insightClient = insights.getClient('87d81c29-756c-4031-b543-f8ddbe6a8cf3');
 db.setup(insightClient);
 
 // view engine setup
+app.set('etag', false);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
