@@ -31,7 +31,7 @@ function getVideos(term, callback) {
 		var termvalue = '%' + term + '%';
 
 		con.query(
-			'SELECT Title,URL,PlayerURL FROM meetup.AllChannel9Videos WHERE Tags like ? order by TotalViewCount DESC LIMIT 10', [termvalue],
+			'SELECT Title,URL,PlayerURL FROM meetup.AllChannel9Videos WHERE Tags like ? order by TotalViewCount DESC LIMIT 15', [termvalue],
 			function(err,rows){
 				con.end();
 				if(err) throw err;
