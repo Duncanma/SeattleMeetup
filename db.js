@@ -2,7 +2,9 @@
 var mysql = require("mysql");
 
 
-function openConnection() {
+function getVideos(term) {
+
+	var con;
 
 	con = mysql.createConnection({
 			host: "localhost",
@@ -16,20 +18,14 @@ function openConnection() {
 			console.log('Error connecting to Db');
 			return;
 		}
-		console.log('Connection established');
-		return con;
+		con.query(
+			'SELECT Title,URL,PlayerURL FROM meetup.AllChannel9Videos WHERE Tags like \'%Azure%\' order by TotalViewCount DESC LIMIT 10',
+			function(err,rows){
+				if(err) throw err;
+				return rows;
+			}
+		);		
 	});
-}
-
-function getVideos(con, term) {
-
-	con.query(
-		'SELECT Title,URL,PlayerURL FROM meetup.AllChannel9Videos WHERE Tags like \'%Azure%\' order by TotalViewCount DESC LIMIT 10',
-		function(err,rows){
-			if(err) throw err;
-			return rows;
-		}
-	);
 }
 
 function endConnection() {
@@ -43,8 +39,6 @@ function endConnection() {
 	
 
 module.exports = {
-	openConnection : openConnection,
-	endConnection : endConnection,
 	getVideos: getVideos
 };
 
