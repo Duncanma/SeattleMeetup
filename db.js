@@ -30,7 +30,7 @@ function getVideos(term) {
 	}
 
 	con.query(
-		'SELECT Title,URL,PlayerURL FROM meetup.AllChannel9Videos WHERE Tags like \'%' + term + '%\' order by TotalViewCount DESC',
+		'SELECT Title,URL,PlayerURL FROM meetup.AllChannel9Videos WHERE Tags like \'%' + term + '%\' order by TotalViewCount DESC LIMIT 10',
 		function(err,rows){
 			if(err) throw err;
 			return rows;
