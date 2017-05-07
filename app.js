@@ -6,6 +6,9 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var db = require('./db.js');
+var cache = require('node-cache');
+
+var myCache = new cache();
 
 var insights = appInsights.setup('87d81c29-756c-4031-b543-f8ddbe6a8cf3').start();
 
@@ -32,14 +35,34 @@ app.get('/', function(req, res, next) {
   res.render('index', { title: 'Seattle Meetup Demo' });
 });
 
+function renderPage(res, term, videos) {
+  res.render('videos', { title: 'Videos for ' + term, result: videos });
+}
+
+
 /* GET video page. */
 app.get('/videos/:term', function(req, res, next) {
   insightClient.trackEvent("www.videos", {term: term});
   var term = req.params.term;
   
   if (term) {
-    var videos = db.getVideos(term, function(videos) {
-        res.render('videos', { title: 'Videos for ' + term, result: videos });
+    var cacheKey = "videos-" + term;
+
+    myCache.get(cacheKey, function(err, value) {
+        if (value===undefined)
+        {
+          //didn't find it
+          var videos = db.getVideos(term, function(videos) {
+              myCache.set(cacheKey, videos, 600, function(err, success)
+              {
+                renderPage(res, term, videos);
+              });
+          });
+        }
+        else 
+        {
+            renderPage(res, term, value);
+        }
     });
   }
   else {
