@@ -9,4 +9,6 @@ block content
     each val in result
       div.col-md-4
         iframe(src=val.PlayerURL)
+        p
+          a(href=val.URL) val.Title
 
