@@ -7,8 +7,9 @@ router.get('/:term', function(req, res, next) {
   var term = req.params.term;
   
   if (term) {
-    var videos = db.getVideos(term);
-    res.render('videos', { title: 'Videos for ' + term, result: videos });
+    var videos = db.getVideos(term, function(videos) {
+        res.render('videos', { title: 'Videos for ' + term, result: videos });
+    });
   }
   else {
     next();

@@ -2,7 +2,7 @@
 var mysql = require("mysql");
 
 
-function getVideos(term) {
+function getVideos(term, callback) {
 
 	var con;
 
@@ -22,7 +22,7 @@ function getVideos(term) {
 			'SELECT Title,URL,PlayerURL FROM meetup.AllChannel9Videos WHERE Tags like \'%Azure%\' order by TotalViewCount DESC LIMIT 10',
 			function(err,rows){
 				if(err) throw err;
-				return rows;
+				callback(rows);
 			}
 		);		
 	});
