@@ -4,11 +4,6 @@ block content
   //Main jumbotron for a primary marketing message or call to action
   div.jumbotron
     h1= title
-  div.row
+  div.list-group
     each val in result
-      div.col-md-6
-        div.videoembed
-          iframe(src=val.PlayerURL)
-          p
-            a(href=val.URL) #{val.Title}
-
+      a.list-group-item(href=val.URL) #{val.Title}
