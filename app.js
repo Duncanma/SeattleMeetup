@@ -11,7 +11,7 @@ var videos = require('./routes/videos');
 
 var insights = appInsights.setup('87d81c29-756c-4031-b543-f8ddbe6a8cf3').start();
 
-db.setup(insights);
+db.setup(insights.getClient('87d81c29-756c-4031-b543-f8ddbe6a8cf3'));
 
 var app = express();
 

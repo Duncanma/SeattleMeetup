@@ -2,8 +2,8 @@
 var mysql = require("mysql");
 var insights;
 
-function setup(appInsights) {
-	insights = appInsights.getClient();
+function setup(client) {
+	insights = client;
 }
 
 function getVideos(term, callback) {
