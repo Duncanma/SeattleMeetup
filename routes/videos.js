@@ -4,7 +4,7 @@ var router = express.Router();
 
 /* GET video page. */
 router.get('/videos', function(req, res, next) {
-  var term = req.url.term;
+  var term = req.query.term;
   if (term) {
     var videos = db.getVideos(term);
     res.render('videos', { title: 'Videos for ' + term, result: videos });
