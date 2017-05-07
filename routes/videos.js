@@ -4,6 +4,7 @@ var router = express.Router();
 
 /* GET video page. */
 router.get('/:term', function(req, res, next) {
+  app.locals.insights.trackEvent("www.videos", {term: term});
   var term = req.params.term;
   
   if (term) {

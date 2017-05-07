@@ -3,6 +3,8 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  app.locals.insights.trackEvent("www.index");
+
   res.render('index', { title: 'Seattle Meetup Demo' });
 });
 

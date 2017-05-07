@@ -8,6 +8,7 @@ function setup(client) {
 
 function getVideos(term, callback) {
 
+
 	var con;
 
 	con = mysql.createConnection({
