@@ -6,8 +6,9 @@ block content
     h1= title
   div.row
     each val in result
-      div.col-md-4
-        iframe(src=val.PlayerURL)
-        p
-          a(href=val.URL) #{val.Title}
+      div.col-md-6
+        div.videoembed
+          iframe(src=val.PlayerURL)
+          p
+            a(href=val.URL) #{val.Title}
 
