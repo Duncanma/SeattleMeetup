@@ -2,9 +2,16 @@ var express = require('express');
 var db = require('../db.js');
 var router = express.Router();
 
+var insights;
+
+function setup(appInsights) {
+	insights = appInsights;
+}
+
+
 /* GET video page. */
 router.get('/:term', function(req, res, next) {
-  req.app.locals.insights.trackEvent("www.videos", {term: term});
+  insights.trackEvent("www.videos", {term: term});
   var term = req.params.term;
   
   if (term) {
@@ -17,4 +24,7 @@ router.get('/:term', function(req, res, next) {
   }
 });
 
-module.exports = router;
+module.exports = {
+	router: router,
+	setup: setup
+};
