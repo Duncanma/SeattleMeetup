@@ -9,9 +9,9 @@ var db = require('./db.js');
 var index = require('./routes/index');
 var videos = require('./routes/videos');
 
-appInsights.setup('87d81c29-756c-4031-b543-f8ddbe6a8cf3').start();
+var insights = appInsights.setup('87d81c29-756c-4031-b543-f8ddbe6a8cf3').start();
 
-db.setup(appInsights);
+db.setup(insights);
 
 var app = express();
 
