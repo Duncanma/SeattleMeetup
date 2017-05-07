@@ -6,8 +6,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var db = require('./db.js');
-var index = require('./routes/index');
-var videos = require('./routes/videos');
 
 var insights = appInsights.setup('87d81c29-756c-4031-b543-f8ddbe6a8cf3').start();
 
@@ -16,8 +14,6 @@ var app = express();
 var insightClient = insights.getClient('87d81c29-756c-4031-b543-f8ddbe6a8cf3');
 
 db.setup(insightClient);
-index.setup(insightClient);
-videos.setup(insightClient);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -31,8 +27,26 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/videos', videos);
+app.get('/', function(req, res, next) {
+  insightClient.trackEvent("www.index");
+  res.render('index', { title: 'Seattle Meetup Demo' });
+});
+
+/* GET video page. */
+app.get('/videos/:term', function(req, res, next) {
+  insightClient.trackEvent("www.videos", {term: term});
+  var term = req.params.term;
+  
+  if (term) {
+    var videos = db.getVideos(term, function(videos) {
+        res.render('videos', { title: 'Videos for ' + term, result: videos });
+    });
+  }
+  else {
+    next();
+  }
+});
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
