@@ -28,8 +28,10 @@ function getVideos(term, callback) {
 
 		insights.trackEvent("mysql.query", {term: term});
 
+		var termvalue = '%' + term + '%';
+
 		con.query(
-			'SELECT Title,URL,PlayerURL FROM meetup.AllChannel9Videos WHERE Tags like \'%' + term + '%\' order by TotalViewCount DESC LIMIT 10',
+			'SELECT Title,URL,PlayerURL FROM meetup.AllChannel9Videos WHERE Tags like ? order by TotalViewCount DESC LIMIT 10', [termvalue],
 			function(err,rows){
 				con.end();
 				if(err) throw err;
