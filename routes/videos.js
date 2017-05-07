@@ -3,8 +3,8 @@ var db = require('../db.js');
 var router = express.Router();
 
 /* GET video page. */
-router.get('/videos', function(req, res, next) {
-  var term = req.query.term;
+router.get('/:term', function(req, res, next) {
+  var term = req.params.term;
   if (term) {
     var videos = db.getVideos(term);
     res.render('videos', { title: 'Videos for ' + term, result: videos });
