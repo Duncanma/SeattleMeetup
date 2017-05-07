@@ -1,6 +1,10 @@
 //db.js module
 var mysql = require("mysql");
+var insights;
 
+function setup(appInsights) {
+	insights = appInsights.getClient();
+}
 
 function getVideos(term, callback) {
 
@@ -18,6 +22,11 @@ function getVideos(term, callback) {
 			console.log('Error connecting to Db');
 			return;
 		}
+
+		insights.trackEvent("mysql.connection");
+
+		insights.trackEvent("mysql.query", {term: term});
+
 		con.query(
 			'SELECT Title,URL,PlayerURL FROM meetup.AllChannel9Videos WHERE Tags like \'%' + term + '%\' order by TotalViewCount DESC LIMIT 10',
 			function(err,rows){
@@ -40,6 +49,7 @@ function endConnection() {
 	
 
 module.exports = {
-	getVideos: getVideos
+	getVideos: getVideos,
+	setup: setup
 };
 

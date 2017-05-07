@@ -11,6 +11,8 @@ var videos = require('./routes/videos');
 
 appInsights.setup('87d81c29-756c-4031-b543-f8ddbe6a8cf3').start();
 
+db.setup(appInsights);
+
 var app = express();
 
 // view engine setup
